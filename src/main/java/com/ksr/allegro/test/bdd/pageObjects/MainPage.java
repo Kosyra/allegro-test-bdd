@@ -1,19 +1,51 @@
 package com.ksr.allegro.test.bdd.pageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends BasePage{
     public MainPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
+
+    /**
+     * Adres url głównej strony Allegro.pl
+     */
+    private static final String urlMain = "https://allegro.pl";
+
+    /**
+     * Pole tekstowe "Czego szukasz?"
+     */
+    private @FindBy(name = "string")
+    WebElement searchField;
+
+    /**
+     * Przycisk "Szukaj"
+     */
+    private @FindBy(xpath = "//button[@data-role = 'search-button']")
+    WebElement searchButton;
+
+    /**
+     * Okno z informacją o cookies
+     */
+    private @FindBy(id = "dialog-content")
+    WebElement cookiesWindow;
+
+    /**
+     * Przycisk "Przejdź dalej" w oknie akceptacji cookies
+     */
+    private @FindBy(css = "button[data-role = 'accept-consent']")
+    WebElement moveForwardCookiesButton;
 
     /**
      * Przechodzi na stronę główną allegro
      */
     public void goToMainPage(){
-        driver.get("https://allegro.pl");
+        driver.get(urlMain);
         ClosePopUpWindow();
     }
 
@@ -22,7 +54,7 @@ public class MainPage extends BasePage{
      * @param  item nazwa szukanego przedmiotu
      */
     public ListingPage searchForItems(String item) {
-        driver.findElement(By.name("string")).sendKeys(item);
+        searchField.sendKeys(item);
         PressSearchButton();
 
         return new ListingPage(driver);
@@ -33,7 +65,7 @@ public class MainPage extends BasePage{
      * Klika w przycisk "Szukaj"
      */
     private void PressSearchButton() {
-        driver.findElement(By.xpath("//button[@data-role = 'search-button']")).click();
+        searchButton.click();
     }
 
     /**
@@ -41,8 +73,8 @@ public class MainPage extends BasePage{
      */
     private void ClosePopUpWindow() {
         try{
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_4f735_RGj-r")));
-            driver.findElement(By.xpath("//button[contains(text(),'przejdź dalej')]")).click();
+            wait.until(ExpectedConditions.visibilityOf(cookiesWindow));
+            moveForwardCookiesButton.click();
         }catch (Exception ignored){}
     }
 }

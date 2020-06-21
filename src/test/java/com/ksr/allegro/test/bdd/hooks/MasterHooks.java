@@ -1,10 +1,8 @@
-package com.ksr.allegro.test.bdd.steps;
+package com.ksr.allegro.test.bdd.hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import utils.DriverFactory;
-
-import java.util.concurrent.TimeUnit;
 
 public class MasterHooks extends DriverFactory {
 
@@ -12,7 +10,6 @@ public class MasterHooks extends DriverFactory {
     public void setUp() {
         driver = getDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @After

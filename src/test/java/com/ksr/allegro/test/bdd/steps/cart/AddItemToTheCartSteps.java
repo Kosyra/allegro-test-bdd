@@ -39,8 +39,8 @@ public class AddItemToTheCartSteps extends DriverFactory {
     }
 
     @And("will go to the eny item page")
-    public void willGoToTheEnyItemPage() throws InterruptedException {
-        itemPage = listingPage.goToItemPage();
+    public void willGoToTheEnyItemPage() {
+        itemPage = listingPage.goToAnyItemPage();
         nameOfItem = itemPage.getItemName();
     }
 
