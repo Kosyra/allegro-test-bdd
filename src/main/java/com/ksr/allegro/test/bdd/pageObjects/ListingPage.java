@@ -37,7 +37,8 @@ public class ListingPage extends BasePage {
      */
     public void selectStatusInUsed() {
         wait.until(x -> usedCheckbox.isDisplayed());
-        actions.moveToElement(usedCheckbox).click().perform();
+        actions.moveToElement(usedCheckbox).perform();
+        usedCheckbox.click();
         wait.until(x -> x.findElements(By.cssSelector("button[title = 'usuń']")).size() == 2);
     }
 

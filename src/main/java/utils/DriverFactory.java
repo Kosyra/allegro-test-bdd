@@ -1,23 +1,12 @@
 package utils;
 
-import com.ksr.allegro.test.bdd.pageObjects.CartPage;
-import com.ksr.allegro.test.bdd.pageObjects.ItemPage;
-import com.ksr.allegro.test.bdd.pageObjects.ListingPage;
-import com.ksr.allegro.test.bdd.pageObjects.MainPage;
-import io.netty.handler.codec.http2.Http2ConnectionPrefaceAndSettingsFrameWrittenEvent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
     public static WebDriver driver;
-
-    public static MainPage mainPage;
-    public static CartPage cartPage;
-    public static ItemPage itemPage;
-    public static ListingPage listingPage;
 
     public WebDriver getDriver(){
         try {
