@@ -27,17 +27,18 @@ public class ListingPage extends BasePage {
     WebElement minimumPriceField;
 
     /**
-     * Grid z przedmiotami
+     * Sekcja z przedmiotami
      */
     @FindBy(css = "section article")
-    List<WebElement> itemsGrid;
+    List<WebElement> itemsSection;
 
     /**
      * Zaznacza checkbox "używane"
      */
     public void selectStatusInUsed() {
-        wait.until(driver1 -> usedCheckbox.isDisplayed());
+        wait.until(x -> usedCheckbox.isDisplayed());
         actions.moveToElement(usedCheckbox).click().perform();
+        wait.until(x -> x.findElements(By.cssSelector("button[title = 'usuń']")).size() == 2);
     }
 
     /**
@@ -47,11 +48,7 @@ public class ListingPage extends BasePage {
     public void setMinimumPrice(int price) {
         actions.moveToElement(minimumPriceField).perform();
         minimumPriceField.sendKeys(String.valueOf(price));
-        final boolean displayed = wait.until(driver -> driver
-                .findElements(By.cssSelector("div")))
-                .stream()
-                .anyMatch(driver -> driver
-                        .findElement(By.xpath("//span[contains(text(), 'cena')]")).isDisplayed());
+        wait.until(x -> x.findElement(By.cssSelector("button[title = 'usuń']")).isDisplayed());
     }
 
     /**
@@ -59,7 +56,7 @@ public class ListingPage extends BasePage {
      * @return Page object przedmiotu
      */
     public ItemPage goToAnyItemPage() {
-        WebElement item = itemsGrid.get(1);
+        WebElement item = itemsSection.get(5);
         actions.moveToElement(item);
         item.click();
 

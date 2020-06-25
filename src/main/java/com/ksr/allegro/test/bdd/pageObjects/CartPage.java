@@ -2,11 +2,21 @@ package com.ksr.allegro.test.bdd.pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CartPage extends BasePage{
     protected CartPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
+
+    /**
+     * Przycisk "usuń przedmiot"
+     */
+    @FindBy(css = "i[title = 'usuń przedmiot']")
+    WebElement removeButton;
 
     /**
      * Sprawdza czy właściwy produkt został dodany do koszyka
@@ -15,7 +25,7 @@ public class CartPage extends BasePage{
      */
     public boolean verifyThatTheElementIsInTheCart(String nameOfItem) {
         try {
-            driver.findElement(By.xpath("//a[contains(text(), '"+nameOfItem+"')]")).isEnabled();
+            driver.findElement(By.xpath("//a[contains(text(), '" + nameOfItem + "')]")).isEnabled();
             return true;
         }catch (Exception ex){
             return false;
@@ -26,7 +36,7 @@ public class CartPage extends BasePage{
      * Usuwa przedmiot z koszyka
      */
     public void removeItem(){
-        driver.findElement(By.cssSelector("i[title = 'usuń przedmiot']")).click();
+        removeButton.click();
     }
 
     /**

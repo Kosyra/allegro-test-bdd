@@ -1,5 +1,6 @@
 package com.ksr.allegro.test.bdd.pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -73,7 +74,7 @@ public class MainPage extends BasePage{
      */
     private void ClosePopUpWindow() {
         try{
-            wait.until(ExpectedConditions.visibilityOf(cookiesWindow));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[data-role = 'accept-consent']")));
             moveForwardCookiesButton.click();
         }catch (Exception ignored){}
     }

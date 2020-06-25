@@ -2,30 +2,50 @@ package com.ksr.allegro.test.bdd.pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ItemPage extends BasePage{
     protected ItemPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
+
+    /**
+     * Przycisk "Dodaj do koszyka"
+     */
+    @FindBy(css = "button#add-to-cart-button")
+    WebElement addToCartButton;
+
+    /**
+     * Przycisk "Przejdź do koszyka"
+     */
+    @FindBy(css = "a[data-analytics-click-label='goToCart']")
+    WebElement goToCartButton;
+
+    /**
+     * Nagłówek z nazwą przedmiotu
+     */
+    @FindBy(css = "div h1")
+    WebElement itemName;
 
     /**
      * Zwraca nazwę produktu umieszczoną w tytule
      * @return nazwa produktu
      */
     public String getItemName() {
-        By itemName = By.cssSelector("div h1");
-        wait.until(driver1 -> driver.findElement(itemName).isDisplayed());
-        return driver.findElement(itemName).getText();
+        wait.until(x -> itemName.isDisplayed());
+        return itemName.getText();
     }
 
     /**
      * Dodaje produkt do koszyka
      */
     public void addToCart() {
-        By addToCartButton = By.cssSelector("button#add-to-cart-button");
-        wait.until(x -> x.findElement(addToCartButton).isDisplayed());
-        driver.findElement(addToCartButton).click();
+        wait.until(x -> addToCartButton.isDisplayed());
+        actions.moveToElement(addToCartButton);
+        addToCartButton.click();
     }
 
 
@@ -34,10 +54,10 @@ public class ItemPage extends BasePage{
      * @return Page object Koszyk
      */
     public CartPage goToCart() {
-        By goToCartButton = By.cssSelector("a[data-analytics-click-label='goToCart']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(goToCartButton));
-        driver.findElement(goToCartButton).click();
-        wait.until(driver1 -> driver1.findElement(By.name("allegro-cart")));
+        wait.until(x -> goToCartButton.isDisplayed());
+        actions.moveToElement(goToCartButton);
+        goToCartButton.click();
+        wait.until(x -> x.findElement(By.name("allegro-cart")));
 
         return new CartPage(driver);
     }
