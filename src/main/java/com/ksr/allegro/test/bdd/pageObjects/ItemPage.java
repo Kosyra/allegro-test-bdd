@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ItemPage extends BasePage{
-    protected ItemPage(WebDriver driver) {
+    public ItemPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

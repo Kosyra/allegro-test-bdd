@@ -53,15 +53,4 @@ public class AddItemToTheCartSteps extends DriverFactory {
     public void the_item_is_added_to_the_cart() {
         cartPage = itemPage.goToCart();
         Assert.assertTrue("W koszyku nie znajduje się oczekiwany produkt",cartPage.verifyThatTheElementIsInTheCart(nameOfItem));}
-
-    @And("remove item from the cart")
-    public void removeItemFromTheCart() {
-        cartPage = itemPage.goToCart();
-        cartPage.removeItem();
-    }
-
-    @Then("the cart is empty")
-    public void theCartIsEmpty() {
-        Assert.assertTrue("Nie została wyświetlona informacja, że koszyk jest pusty", cartPage.verifyIfCartIsEmpty());
-    }
 }

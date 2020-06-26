@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
         glue = "com.ksr.allegro.test.bdd.steps",
         monochrome = true,
         tags = {}
-//        plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json", "com.cucumber.listener.ExtentCucumberFormatter:target/report.html"}
         )
 public class MainRunner {
 }

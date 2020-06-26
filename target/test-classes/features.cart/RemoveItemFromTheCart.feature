@@ -1,5 +1,7 @@
 Feature: Removing item from the cart
 
+  As a user, I want to be able to remove an item from the cart
+
   Background:
     Given User navigates to the allegro website
 
