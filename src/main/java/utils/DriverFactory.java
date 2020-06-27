@@ -10,7 +10,7 @@ public class DriverFactory {
 
     public WebDriver getDriver(){
         try {
-            System.setProperty("webdriver.chrome.driver", "/Users/ksr/Downloads/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "src/main/java/utils/drivers/chromedriver");
             driver = new ChromeDriver();
 
         }catch (Exception e){
