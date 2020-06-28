@@ -12,31 +12,10 @@ import org.junit.Assert;
 import utils.DriverFactory;
 
 public class AddItemToTheCartSteps extends DriverFactory {
-    MainPage mainPage = new MainPage(driver);
-    ListingPage listingPage;
+    ListingPage listingPage = new ListingPage(driver);
     ItemPage itemPage;
     CartPage cartPage;
     String nameOfItem;
-
-    @Given("User navigates to the allegro website")
-    public void user_navigates_to_the_allegro_website() {
-        mainPage.goToMainPage();
-    }
-
-    @When("User searches for {string}")
-    public void user_searches_for(String item) {
-        listingPage = mainPage.searchForItems(item);
-    }
-
-    @When("Set minimum price to {int} PLN")
-    public void set_minimum_price_to_PLN(Integer price) {
-        listingPage.setMinimumPrice(price);
-    }
-
-    @When("check used checkbox")
-    public void check_used_checkbox() {
-        listingPage.selectStatusInUsed();
-    }
 
     @And("will go to the eny item page")
     public void willGoToTheEnyItemPage() {
